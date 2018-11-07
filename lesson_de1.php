@@ -3,9 +3,6 @@ class Animal
 {
   public function bark()
   {
-    var_dump('----------3-----------');
-    print("<br>");
-
     echo 'Yeah, it’s barking.' . PHP_EOL;
   }
 }
@@ -17,9 +14,6 @@ class Dog extends Animal
 
   public function __construct($name, $age=1)
   {
-    var_dump('----------2-----------');
-    print("<br>");
-
     $this->name = $name;
     $this->age = $age;
   }
@@ -31,9 +25,6 @@ class MechaDog extends Dog
 
   public function __construct($name, $age=1)
   {
-    var_dump('----------1-----------');
-    print("<br>");
-
     parent::__construct($name);
     $this->data = array(
       'apache' => 'apache',
@@ -44,24 +35,11 @@ class MechaDog extends Dog
 
   public function proc($arg)
   {
-    print("<br>");
-    var_dump('----------4-----------');
-    print("<br>");
 
-    // この変数の内容が「[0]=> string(3) "GET"」になっているが、「[0]=> string(0) "" [1]=> string(3) "bsb"」になるべき
     $path = explode("/", explode(" ", $arg)[1]);
-    var_dump($path);
-    print("<br>");
-
-    // $pathの変数が1つのため配列が空になっている。ここを「[0]=> string(3) "bsb"」としたい
     array_shift($path);
-    var_dump($path);
-    print("<br>");
 
     if( is_null($path) ) {
-      var_dump('----------5-----------');
-      print("<br>");
-
       $keys = array();
       while (list($key, $val) = each($this->data)) {
         array_push($keys, $key);
@@ -69,22 +47,11 @@ class MechaDog extends Dog
       var_dump($keys);
     }
     else if(count($path) == 2){
-      var_dump('----------6-----------');
-      print("<br>");
-
       $this->data[$path[0]] = $path[1];
       echo $path[1] . PHP_EOL;
     }
     else {
-      var_dump('----------7-----------');
-      print("<br>");
-
-      print("データ配列：：");
-      var_dump($this->data[$path[0]]);
-      print("<br>");
-
-      // 空の配列となっているため「=>」のみとなっている。「bsd=>mit」となるべき。
-      echo $path[0] . "=>" . $this->data[$path[0]] . PHP_EOL; //data[]
+      echo $path[0] . "=>" . $this->data[$path[0]] . PHP_EOL;
     }
   }
 }
